@@ -5,6 +5,7 @@ export interface Item {
   id: string;
   name: string;
   price: number;
+  quantity: number;
 }
 
 export interface CartState {
@@ -20,14 +21,32 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<Item>) => {
-      state.items.push(action.payload);
+      // Sprawdz czy element istnieje w koszyku
+      const item = state.items.find((i) => i.id === action.payload.id);
+
+      if (item) {
+        // jesli tak
+        item.quantity++; // zwieksz ilosc o jeden
+      } else {
+        // jesli nie
+        state.items.push(action.payload); // dodaj element do koszyka
+      }
+    },
+    removeItem: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+
+      const itemsWithoutGivenItem = state.items.filter(
+        (item) => item.id !== id
+      );
+      state.items = itemsWithoutGivenItem;
     },
   },
 });
 
-export const { addItem } = cartSlice.actions;
+export const { addItem, removeItem } = cartSlice.actions;
 
 export const selectItemsQuantity = (state: RootState) => {
+  // TODO 4: Zmodyfikuj selector, tak aby zliczał prawidłowo elementy
   return state.cart.items.length;
 };
 
