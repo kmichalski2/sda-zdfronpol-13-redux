@@ -31,6 +31,10 @@ export const selectItemsQuantity = (state: RootState) => {
   return state.cart.items.length;
 };
 
+export const selectItems = (state: RootState) => {
+  return state.cart.items;
+};
+
 // Sposób 2 ( Ten lepszy )
 export const cartReducer = cartSlice.reducer;
 
