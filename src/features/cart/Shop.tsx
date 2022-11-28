@@ -1,19 +1,19 @@
 import { Cart } from "./Cart";
-import { Item } from './cartSlice';
+import './Shop.css';
+import { useAppSelector } from '../../app/hooks';
+import { ProductModel, selectProducts } from "../product/productsSlice";
 import { Product } from "./Product";
 
 export function Shop() {
-  const product: Item = {
-    id: '1',
-    name: 'Call of Duty',
-    price: 150
-}
+  const products: ProductModel[] = useAppSelector(selectProducts);
 
     return (
         <div>
             <Cart />
 
-            <Product name={product.name} id={product.id} price={product.price} />
+            <div className="products-list">
+              { products.map((product, key) => <Product key={key} name={product.name} id={product.id} price={product.price} />)}
+            </div>
         </div>
     )
 }
