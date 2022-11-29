@@ -22,6 +22,6 @@ export interface ProductProps {
         <h3>{product.name}</h3>
         <span className="product-price">{product.price}</span>
 
-        <button className="product-btn" onClick={() => {dispatch(addItem(item))}}>Add product</button>
+        <button className="btn btn-primary" onClick={() => {dispatch(addItem(item))}}>Add product</button>
       </div>)
   }

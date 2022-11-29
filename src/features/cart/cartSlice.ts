@@ -16,6 +16,10 @@ const initialState: CartState = {
   items: [],
 };
 
+const remove = (items: Item[], id: string) => {
+  items = items.filter((i) => i.id !== id);
+};
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -40,10 +44,33 @@ export const cartSlice = createSlice({
       );
       state.items = itemsWithoutGivenItem;
     },
+    increaseQuantity: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+
+      const item = state.items.find((i) => i.id === id);
+
+      if (item) {
+        item.quantity++;
+      }
+    },
+    decreaseQuantity: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+
+      const item = state.items.find((i) => i.id === id);
+
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity--;
+        } else {
+          state.items = state.items.filter((i) => i.id !== id);
+        }
+      }
+    },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, increaseQuantity, decreaseQuantity } =
+  cartSlice.actions;
 
 export const selectItemsQuantity = (state: RootState) => {
   // TODO 4: Zmodyfikuj selector, tak aby zliczał prawidłowo elementy
@@ -71,8 +98,15 @@ export const selectItemsQuantity = (state: RootState) => {
   return total;
 };
 
-// TODO: Utwórz selector który zwróci całkowitą sumę koszyka
-// I wyświetl w koszyku ( komponent Cart )
+export const selectTotal = (state: RootState) => {
+  let total = 0;
+
+  state.cart.items.forEach((item) => {
+    total += item.price * item.quantity;
+  });
+
+  return total;
+};
 
 export const selectItems = (state: RootState) => {
   return state.cart.items;
