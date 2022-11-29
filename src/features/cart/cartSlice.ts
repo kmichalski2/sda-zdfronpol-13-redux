@@ -10,14 +10,12 @@ export interface Item {
 
 export interface CartState {
   items: Item[];
+  isDisplayed: boolean;
 }
 
 const initialState: CartState = {
   items: [],
-};
-
-const remove = (items: Item[], id: string) => {
-  items = items.filter((i) => i.id !== id);
+  isDisplayed: false,
 };
 
 export const cartSlice = createSlice({
@@ -66,11 +64,23 @@ export const cartSlice = createSlice({
         }
       }
     },
+    toggleCart: (state) => {
+      state.isDisplayed = !state.isDisplayed;
+    },
   },
 });
 
-export const { addItem, removeItem, increaseQuantity, decreaseQuantity } =
-  cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  increaseQuantity,
+  decreaseQuantity,
+  toggleCart,
+} = cartSlice.actions;
+
+export const selectIsDisplayed = (state: RootState) => {
+  return state.cart.isDisplayed;
+};
 
 export const selectItemsQuantity = (state: RootState) => {
   // TODO 4: Zmodyfikuj selector, tak aby zliczał prawidłowo elementy

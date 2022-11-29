@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import { Shop } from './features/cart/Shop';
 import './../node_modules/bootstrap/dist/css/bootstrap.css';
+import { Navbar } from './Navbar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Shop />
-      </header>
+      <Navbar />
+      <Shop />
     </div>
   );
 }
