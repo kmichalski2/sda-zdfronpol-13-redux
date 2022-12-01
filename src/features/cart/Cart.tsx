@@ -1,9 +1,8 @@
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectItems, selectItemsQuantity, Item, removeItem, selectTotal, decreaseQuantity, increaseQuantity, selectIsDisplayed } from './cartSlice';
+import { selectItems, Item, removeItem, selectTotal, decreaseQuantity, increaseQuantity, selectIsDisplayed } from './cartSlice';
 import './Cart.css';
 
 export function Cart() {
-    const quantity: number = useAppSelector(selectItemsQuantity);
     const items: Item[] = useAppSelector(selectItems);
     const total: number = useAppSelector(selectTotal);
     const isDisplayed: boolean = useAppSelector(selectIsDisplayed);
