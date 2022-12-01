@@ -8,11 +8,11 @@ export interface Notification {
 }
 
 export interface NotificationsState {
-  items: Notification[];
+  notifications: Notification[];
 }
 
 const initialState: NotificationsState = {
-  items: [{ id: "1", type: "success", message: "Pierwszy alert" }],
+  notifications: [],
 };
 
 export const notificationsSlice = createSlice({
@@ -52,11 +52,13 @@ export const notificationsSlice = createSlice({
       // state.items.push(notification);
 
       // Kopiowanie tablicy i dodanie nowego elementu na koniec
-      state.items = [...state.items, notification];
+      state.notifications = [...state.notifications, notification];
     },
     removeNotification(state, action: PayloadAction<{ id: string }>) {
       const { id } = action.payload;
-      state.items = state.items.filter((item) => item.id !== id);
+      state.notifications = state.notifications.filter(
+        (notification) => notification.id !== id
+      );
     },
   },
 });
@@ -67,4 +69,4 @@ export const { addNotification, removeNotification } =
   notificationsSlice.actions;
 
 export const selectNotifications = (state: RootState) =>
-  state.notifications.items;
+  state.notifications.notifications;
