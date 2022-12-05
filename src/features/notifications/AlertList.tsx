@@ -1,6 +1,6 @@
 import { Alert } from "./Alert"
 import { useAppSelector } from '../../app/hooks';
-import { selectNotifications } from "./notificationsSlice";
+import { selectLast3Notifications, selectNotifications } from "./notificationsSlice";
 
 export function AlertList() {
     const alerts = useAppSelector(selectNotifications);

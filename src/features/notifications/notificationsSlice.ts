@@ -51,6 +51,11 @@ export const notificationsSlice = createSlice({
       // Dodawanie elementu do tablicy: Sposób 1
       // state.items.push(notification);
 
+      // Usuń pierwszy element kiedy w tablicy sa ju 3 powiadomienia
+      // if (state.notifications.length === 3) {
+      //   state.notifications.shift();
+      // }
+
       // Kopiowanie tablicy i dodanie nowego elementu na koniec
       state.notifications = [...state.notifications, notification];
     },
@@ -70,3 +75,7 @@ export const { addNotification, removeNotification } =
 
 export const selectNotifications = (state: RootState) =>
   state.notifications.notifications;
+
+export const selectLast3Notifications = (state: RootState) => {
+  return state.notifications.notifications.slice(-3);
+};

@@ -21,7 +21,7 @@ export interface ProductProps {
 
     const handleClick = () => { 
       dispatch(addItem(item));
-      dispatch(addNotification({ message: 'Produkt został dodany do koszyka.', type: 'success'}))
+      dispatch(addNotification({ message: `Produkt ${item.name} został dodany do koszyka.`, type: 'success'}))
     };
   
     return (<div className="card">
