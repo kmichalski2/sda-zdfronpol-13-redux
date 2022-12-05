@@ -1,12 +1,18 @@
 import { Cart } from "./Cart";
 import './Shop.css';
-import { useAppSelector } from '../../app/hooks';
-import { ProductModel, selectSearchResults } from "../product/productsSlice";
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { loadProducts, ProductModel, selectSearchResults } from "../product/productsSlice";
 import { Product } from "./Product";
 import { AlertList } from "../notifications/AlertList";
+import { useEffect } from "react";
 
 export function Shop() {
   const products: ProductModel[] = useAppSelector(selectSearchResults);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);
 
     return (
         <div className="position-relative">
