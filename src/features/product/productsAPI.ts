@@ -12,3 +12,12 @@ export const fetchProducts = async (): Promise<ProductResponse[]> => {
     response.json()
   );
 };
+
+export const fetchSortedProducts = async (
+  sort: string
+): Promise<ProductResponse[]> => {
+  // sort = "asc" || "desc"
+  return fetch("https://fakestoreapi.com/products?sort=" + sort).then(
+    (response) => response.json()
+  );
+};
